@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_a.c                                         :+:      :+:    :+:   */
+/*   ft_print_decimal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:47:54 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 18:42:08 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 14:42:37 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:26:52 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack_node **a, bool print
+static int	ft_putnbr_recursive(int n)
 {
-	rotate(a);
-	if (!print)
-		ft_printf("ra\n");
+	int	count;
+
+	count = 0;
+	if (n >= 10)
+		count += ft_putnbr_recursive(n / 10);
+	count += ft_print_char((n % 10) + '0');
+	return (count);
 }
-void	rra(t_stack *stack)
-{
-	t_node	*last;
-	t_node	*prev;
 
-	if (stack->size < 2)
-		return ;
-	last = stack->top;
-	prev = NULL;
-	while (last->next)
+int	ft_print_decimal(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n == -2147483648)
+		return (ft_print_str("-2147483648"));
+	if (n < 0)
 	{
-		prev = last;
-		last = last->next;
+		count += ft_print_char('-');
+		n = -n;
 	}
-	prev->next = NULL;
-	last->next = stack->top;
-	stack->top = last;
-	write(1, "rra\n", 4);
+	count += ft_putnbr_recursive(n);
+	return (count);
 }

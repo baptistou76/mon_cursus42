@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_a.c                                         :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:47:54 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 18:42:08 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 14:36:44 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:28:44 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack_node **a, bool print
+int	ft_print_str(char *str)
 {
-	rotate(a);
-	if (!print)
-		ft_printf("ra\n");
-}
-void	rra(t_stack *stack)
-{
-	t_node	*last;
-	t_node	*prev;
+	int	count;
 
-	if (stack->size < 2)
-		return ;
-	last = stack->top;
-	prev = NULL;
-	while (last->next)
+	count = 0;
+	if (!str)
+		str = "(null)";
+	while (*str)
 	{
-		prev = last;
-		last = last->next;
+		count += write(1, str, 1);
+		str++;
 	}
-	prev->next = NULL;
-	last->next = stack->top;
-	stack->top = last;
-	write(1, "rra\n", 4);
+	return (count);
 }

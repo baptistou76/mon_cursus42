@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_a.c                                         :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:47:54 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 18:42:08 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 16:06:35 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 14:29:51 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack_node **a, bool print
+int	ft_print_hex_up(unsigned int n)
 {
-	rotate(a);
-	if (!print)
-		ft_printf("ra\n");
-}
-void	rra(t_stack *stack)
-{
-	t_node	*last;
-	t_node	*prev;
+	size_t	hex_len;
+	char	*hex;
 
-	if (stack->size < 2)
-		return ;
-	last = stack->top;
-	prev = NULL;
-	while (last->next)
-	{
-		prev = last;
-		last = last->next;
-	}
-	prev->next = NULL;
-	last->next = stack->top;
-	stack->top = last;
-	write(1, "rra\n", 4);
+	hex_len = 0;
+	hex = "0123456789ABCDEF";
+	if (n >= 16)
+		hex_len += ft_print_hex_up(n / 16);
+	hex_len += write(1, &hex[n % 16], 1);
+	return (hex_len);
 }

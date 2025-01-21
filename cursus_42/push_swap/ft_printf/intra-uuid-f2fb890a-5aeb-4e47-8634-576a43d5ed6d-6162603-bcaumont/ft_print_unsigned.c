@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_a.c                                         :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:47:54 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 18:42:08 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 15:54:23 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:27:28 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack_node **a, bool print
+static int	ft_putnbr_unsigned(unsigned int n)
 {
-	rotate(a);
-	if (!print)
-		ft_printf("ra\n");
+	int	count;
+
+	count = 0;
+	if (n >= 10)
+		count += ft_putnbr_unsigned(n / 10);
+	count += ft_print_char((n % 10) + '0');
+	return (count);
 }
-void	rra(t_stack *stack)
-{
-	t_node	*last;
-	t_node	*prev;
 
-	if (stack->size < 2)
-		return ;
-	last = stack->top;
-	prev = NULL;
-	while (last->next)
-	{
-		prev = last;
-		last = last->next;
-	}
-	prev->next = NULL;
-	last->next = stack->top;
-	stack->top = last;
-	write(1, "rra\n", 4);
+int	ft_print_unsigned(unsigned int n)
+{
+	return (ft_putnbr_unsigned(n));
 }
