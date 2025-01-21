@@ -6,7 +6,7 @@
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:42:01 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/31 13:03:39 by bcaumont         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:32:45 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
+int					ft_is_space(char c);
+int					ft_is_space(char c);
 
 #endif

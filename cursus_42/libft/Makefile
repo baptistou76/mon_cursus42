@@ -36,6 +36,8 @@ SRC = ft_bzero.c \
       ft_putstr_fd.c\
       ft_putendl_fd.c\
       ft_itoa.c\
+      ft_is_space.c\
+      ft_atol.c\
 
 BONUS = ft_lstnew_bonus.c\
         ft_lstadd_front_bonus.c\
