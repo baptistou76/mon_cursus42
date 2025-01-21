@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/20 13:59:46 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/20 14:02:31 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	push(t_stack *stack, int value)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	t_node	*new_node;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	new_node = create_node(value);
+	if (!new_node)
+		return ;
+	new_node->next = stack->top;
+	stack->top = new_node;
+	stack->size++;
 }

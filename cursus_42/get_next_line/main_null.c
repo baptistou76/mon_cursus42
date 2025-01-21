@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/21 13:40:17 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/21 13:48:16 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	main(void)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	int	fd;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	fd = open("fichier.txt", O_RDONLY);
+	printf("%s\n", get_next_line(fd - 1));
+	return (0);
 }

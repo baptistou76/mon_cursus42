@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   tiny_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2025/01/04 16:24:34 by bcaumont          #+#    #+#             */
+/*   Updated: 2025/01/04 16:28:03 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	tiny_sort(t_stack_node **a)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	t_stack_node *highest_node;
+	highest_node = find_highest(*a);
+	if (*a == highest_node)
+		ra(a, false);
+	else if ((*a)->next == highest_node)
+		rra(a, false);
+	if ((*a)->value > (*a)->next->value)
+		sa(a, false);
 }

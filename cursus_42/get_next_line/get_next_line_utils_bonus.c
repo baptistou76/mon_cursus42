@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 15:37:41 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/11/07 15:38:30 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/16 09:39:59 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/16 09:44:27 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,58 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	i = 0;
-	while (i++ < n)
-		*(char *)dest++ = *(char *)src++;
-	return ((void *)((char *)dest - i));
+	if (n == 0 || dest == src)
+		return (dest);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	if (d > s)
+	{
+		while (n--)
+		{
+			d[n] = s[n];
+		}
+	}
+	else
+	{
+		while (n--)
+			*d++ = *s++;
+	}
+	return (dest);
 }
 
 size_t	ft_strlen(const char *s)
 {
-	const char	*org = s;
+	size_t	i;
 
-	while (*s)
-		++s;
-	return (s - org);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
-void	ft_strcat(char **dst_ptr, const char *src)
+void	ft_strcat(char **dest_pointer, const char *src)
 {
-	size_t	dst_len;
+	size_t	dest_len;
 	size_t	src_len;
-	char	*ans;
+	char	*new_dest;
 
-	dst_len = ft_strlen(*dst_ptr);
+	if (*dest_pointer == NULL)
+		dest_len = 0;
+	else
+		dest_len = ft_strlen(*dest_pointer);
 	src_len = ft_strlen(src);
-	ans = malloc(dst_len + src_len + 1);
-	if (ans)
+	new_dest = malloc(dest_len + src_len + 1);
+	if (new_dest)
 	{
-		ft_memcpy(ans, *dst_ptr, dst_len);
-		ft_memcpy(ans + dst_len, src, src_len);
-		ans[dst_len + src_len] = '\0';
+		ft_memmove(new_dest, *dest_pointer, dest_len);
+		ft_memmove(new_dest + dest_len, src, src_len);
+		new_dest[dest_len + src_len] = '\0';
 	}
-	free(*dst_ptr);
-	*dst_ptr = ans;
+	free(*dest_pointer);
+	*dest_pointer = new_dest;
 }

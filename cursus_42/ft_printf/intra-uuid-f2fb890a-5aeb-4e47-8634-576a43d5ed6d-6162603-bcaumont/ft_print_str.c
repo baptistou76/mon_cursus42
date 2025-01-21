@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 14:36:44 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:28:44 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_print_str(char *str)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	int	count;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
+	count = 0;
+	if (!str)
+		str = "(null)";
+	while (*str)
 	{
-		while (n--)
-			d[n] = s[n];
+		count += write(1, str, 1);
+		str++;
 	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	return (count);
 }

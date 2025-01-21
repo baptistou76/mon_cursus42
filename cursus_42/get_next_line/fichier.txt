@@ -1,0 +1,6 @@
+Salut tout le monde !
+Ceci est mon test afin de verifier que gnl fonctionne bien. Mais il 
+faut bien admettre que ca me coute quand meme.
+Etant donne la prise de tete que c'est.
+Je continue de rajouter des lignes randoms afin de verifier que mon programme fonctionne
+et je continue d'ecrire encore.

@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/20 13:53:33 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/20 13:57:14 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+t_node	*create_node(int value)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	t_node	*new_node;
 
-	if (!dest || !src)
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
 		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
 }

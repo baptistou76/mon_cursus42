@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/15 11:20:35 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/19 16:53:59 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+static int	ft_isspace(int c)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	if ((c >= 9 && c <= 13) || (c == 32))
+		return (1);
+	return (0);
+}
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
+int	ft_atoi(const char *nptr)
+{
+	int	result;
+	int	sign;
+
+	result = 0;
+	sign = 1;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		while (n--)
-			d[n] = s[n];
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
 	}
-	else
+	while (ft_isdigit(*nptr))
 	{
-		while (n--)
-			*d++ = *s++;
+		result = result * 10 + (*nptr - '0');
+		nptr++;
 	}
-	return (dest);
+	return (result * sign);
 }

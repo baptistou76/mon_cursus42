@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 15:54:23 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:27:28 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+static int	ft_putnbr_unsigned(unsigned int n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	int	count;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	count = 0;
+	if (n >= 10)
+		count += ft_putnbr_unsigned(n / 10);
+	count += ft_print_char((n % 10) + '0');
+	return (count);
+}
+
+int	ft_print_unsigned(unsigned int n)
+{
+	return (ft_putnbr_unsigned(n));
 }

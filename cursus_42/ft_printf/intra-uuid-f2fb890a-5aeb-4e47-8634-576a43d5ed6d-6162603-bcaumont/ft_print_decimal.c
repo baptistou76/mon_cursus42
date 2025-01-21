@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_decimal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 15:05:08 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/11/16 11:37:00 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 14:42:37 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:26:52 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+static int	ft_putnbr_recursive(int n)
 {
-	va_list	args;
-	int		count;
+	int	count;
 
 	count = 0;
-	va_start(args, format);
-	while (*format)
+	if (n >= 10)
+		count += ft_putnbr_recursive(n / 10);
+	count += ft_print_char((n % 10) + '0');
+	return (count);
+}
+
+int	ft_print_decimal(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n == -2147483648)
+		return (ft_print_str("-2147483648"));
+	if (n < 0)
 	{
-		if (*format == '%' && *(format + 1))
-		{
-			count += ft_conversion(*(format + 1), args);
-			format += 2;
-		}
-		else
-			count += ft_print_char(*format++);
+		count += ft_print_char('-');
+		n = -n;
 	}
-	va_end(args);
+	count += ft_putnbr_recursive(n);
 	return (count);
 }

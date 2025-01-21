@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 13:16:57 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/11/07 13:36:04 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/14 18:06:28 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/16 08:54:35 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,34 @@
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s != '\0' && *s != c)
-		s++;
+		++s;
 	if (*s != '\0' || c == '\0')
 		return ((char *)s);
 	return (NULL);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	i = 0;
-	while (i++ < n)
-		*(char *)dest++ = *(char *)src++;
-	return ((void *)(char *)dest - i);
+	if (n == 0 || dest == src)
+		return (dest);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	if (d > s)
+	{
+		while (n--)
+		{
+			d[n] = s[n];
+		}
+	}
+	else
+	{
+		while (n--)
+			*d++ = *s++;
+	}
+	return (dest);
 }
 
 size_t	ft_strlen(const char *s)
@@ -41,21 +55,24 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_strcat(char **dest_ptr, const char *src)
+void	ft_strcat(char **dest_pointer, const char *src)
 {
 	size_t	dest_len;
 	size_t	src_len;
-	char	*result;
+	char	*new_dest;
 
-	dest_len = ft_strlen(*dest_ptr);
+	if (*dest_pointer == NULL)
+		dest_len = 0;
+	else
+		dest_len = ft_strlen(*dest_pointer);
 	src_len = ft_strlen(src);
-	result = malloc(dest_len + src_len + 1);
-	if (result)
+	new_dest = malloc(dest_len + src_len + 1);
+	if (new_dest)
 	{
-		ft_memcpy(result, *dest_ptr, dest_len);
-		ft_memcpy(result + dest_len, src, src_len);
-		result[dest_len + src_len] = '\0';
+		ft_memmove(new_dest, *dest_pointer, dest_len);
+		ft_memmove(new_dest + dest_len, src, src_len);
+		new_dest[dest_len + src_len] = '\0';
 	}
-	free(*dest_ptr);
-	*dest_ptr = result;
+	free(*dest_pointer);
+	*dest_pointer = new_dest;
 }

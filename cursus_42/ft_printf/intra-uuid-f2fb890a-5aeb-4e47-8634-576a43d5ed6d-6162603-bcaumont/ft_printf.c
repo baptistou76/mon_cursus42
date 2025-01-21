@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:15:33 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/10/22 14:07:53 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/11/02 15:05:08 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/11/05 13:27:35 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_printf(const char *format, ...)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	va_list	args;
+	int		count;
 
-	if (!dest || !src)
-		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d > s)
+	count = 0;
+	va_start(args, format);
+	while (*format)
 	{
-		while (n--)
-			d[n] = s[n];
+		if (*format == '%' && *(format + 1))
+		{
+			count += ft_conversion(*(format + 1), args);
+			format += 2;
+		}
+		else
+			count += ft_print_char(*format++);
 	}
-	else
-	{
-		while (n--)
-			*d++ = *s++;
-	}
-	return (dest);
+	va_end(args);
+	return (count);
 }
