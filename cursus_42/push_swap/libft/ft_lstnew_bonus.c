@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/29 16:10:36 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/29 16:53:01 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+t_list	*ft_lstnew(void *content)
 {
-	t_node	*temp;
-	int		value;
+	t_list	*new_node;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }

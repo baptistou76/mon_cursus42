@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/22 17:11:31 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/22 17:47:51 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+char	*ft_strdup(const char *s)
 {
-	t_node	*temp;
-	int		value;
+	char	*dup;
+	size_t	len;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	len = ft_strlen(s) + 1;
+	dup = (char *)malloc(len);
+	if (dup == NULL)
+		return (NULL);
+	ft_memcpy(dup, s, len);
+	return (dup);
 }

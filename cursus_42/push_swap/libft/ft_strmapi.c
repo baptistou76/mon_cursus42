@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/19 15:54:25 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/22 16:24:47 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_node	*temp;
-	int		value;
+	char	*new_str;
+	size_t	i;
+	size_t	len;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	new_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		new_str[i] = f(i, s[i]);
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }

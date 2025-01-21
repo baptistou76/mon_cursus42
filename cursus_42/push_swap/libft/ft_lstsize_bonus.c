@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/29 17:41:41 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/29 18:07:15 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+int	ft_lstsize(t_list *list)
 {
-	t_node	*temp;
-	int		value;
+	size_t	lst_len;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	lst_len = 0;
+	while (list)
+	{
+		lst_len++;
+		list = list->next;
+	}
+	return (lst_len);
 }

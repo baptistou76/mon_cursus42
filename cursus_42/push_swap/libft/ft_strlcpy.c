@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/15 11:15:59 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/19 11:05:38 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	t_node	*temp;
-	int		value;
+	size_t	c;
+	size_t	src_len;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	c = 0;
+	if (size > 0)
+	{
+		while (c < size - 1 && src[c])
+		{
+			dst[c] = src[c];
+			c++;
+		}
+		dst[c] = '\0';
+	}
+	src_len = 0;
+	while (src[src_len])
+		src_len++;
+	return (src_len);
 }

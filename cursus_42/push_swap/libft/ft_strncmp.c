@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 17:39:50 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 16:12:57 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/15 11:18:27 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/19 11:39:41 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	size_t	c;
 
-	a = NULL;
-	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
-		argv = ft_spliter(argv[1], ' ');
-	init_stack_a(&a, argv + 1);
-	if (!stack_sorted(a))
+	c = 0;
+	while (c < n && (s1[c] || s2[c]))
 	{
-		if (stack_len(a) == 2)
-			sa(&a, false);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-			sort_stack(&a, &b);
+		if (s1[c] != s2[c])
+			return ((unsigned char)s1[c] - (unsigned char)s2[c]);
+		c++;
 	}
-	free_stack(&a);
 	return (0);
 }

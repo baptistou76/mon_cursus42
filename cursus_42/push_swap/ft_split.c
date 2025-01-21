@@ -6,18 +6,18 @@
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:19:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2024/12/28 16:19:31 by bcaumont         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:51:21 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_isspace(char c)
-{
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
+// int	ft_isspace(char c)
+// {
+// 	if ((c >= 9 && c <= 13) || c == ' ')
+// 		return (1);
+// 	return (0);
+// }
 
 int	word_count(char *str)
 {
@@ -28,10 +28,10 @@ int	word_count(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (ft_isspace(str[i]))
+		while (ft_is_space(str[i]))
 			i++;
 		len++;
-		while (!ft_isspace(str[i]))
+		while (!ft_is_space(str[i]))
 			i++;
 	}
 	return (len);
@@ -59,7 +59,7 @@ char	*copy_word(char *str, char separator)
 	return (next_str);
 }
 
-void	**ft_split(char *str, char separator)
+char	**ft_spliter(char *str, char separator)
 {
 	int		words_number;
 	char	**vector_strings;
@@ -68,7 +68,7 @@ void	**ft_split(char *str, char separator)
 	i = 0;
 	words_number = word_count(str);
 	if (!words_number)
-		return ;
+		return (NULL);
 	vector_strings = malloc(sizeof(char *) * (size_t)(words_number + 2));
 	if (!vector_strings)
 		return (NULL);

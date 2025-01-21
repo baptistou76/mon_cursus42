@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:08:09 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/21 15:49:56 by bcaumont         ###   ########.fr       */
+/*   Created: 2024/10/19 15:58:46 by bcaumont          #+#    #+#             */
+/*   Updated: 2024/10/22 13:49:54 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	pop(t_stack *stack)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_node	*temp;
-	int		value;
+	char	*new_str;
+	size_t	len1;
+	size_t	len2;
 
-	if (!stack->top)
-		return (0);
-	temp = stack->top;
-	value = temp->value;
-	stack->top = temp->next;
-	free(temp);
-	stack->size--;
-	return (value);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	new_str = (char *)malloc(len1 + len2 +1);
+	if (!new_str)
+		return (NULL);
+	ft_memcpy(new_str, s1, len1);
+	ft_memcpy(new_str + len1, s2, len2);
+	new_str[len1 + len2] = '\0';
+	return (new_str);
 }
