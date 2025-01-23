@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_both.c                                      :+:      :+:    :+:   */
+/*   turk_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:51:50 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/01/23 18:52:08 by bcaumont         ###   ########.fr       */
+/*   Created: 2025/01/23 18:27:22 by bcaumont          #+#    #+#             */
+/*   Updated: 2025/01/23 18:37:13 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_both(t_stack_node **a, t_stack_node **b,
-		t_stack_node *cheapest_node)
-{
-	while (*b != cheapest_node->target_node && *a != cheapest_node)
-		rr(a, b, false);
-	set_current_position(*a);
-	set_current_position(*b);
-}
+/** Turk_sort, Algorithme principal **/
 
-void	rev_rotate_both(t_stack_node **a, t_stack_node **b,
-		t_stack_node *cheapest_node)
+void	turk_sort(t_stack_node **a, t_stack_node **b)
 {
-	while (*b != cheapest_node->target_node && *a != cheapest_node)
-		rrr(a, b, false);
+	int	len_a;
+
+	len_a = stack_len(*a);
+	if (len_a-- > 3 && !stack_sorted(*a))
+		pb(b, a, false);
+	if (len_a-- > 3 && !stack_sorted(*a))
+		pb(b, a, false);
+	while (len_a-- > 3 && !stack_sorted(*a))
+	{
+		init_nodes(*a, *b);
+		move_a_to_b(a, b);
+	}
+	tiny_sort(a);
+	while (*b)
+	{
+		init_nodes(*a, *b);
+		move_b_to_a(a, b);
+	}
 	set_current_position(*a);
-	set_current_position(*b);
+	min_on_top(a);
 }
