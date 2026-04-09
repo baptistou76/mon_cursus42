@@ -1,4 +1,0 @@
-Essayons de faire ca avec plusieurs fichiers textes.
-Apres tout, nous ne faisons jamais assez de tests.
-N'est ce pas?
-Non.
