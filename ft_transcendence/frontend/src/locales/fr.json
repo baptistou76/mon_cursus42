@@ -1,0 +1,272 @@
+{
+  "menu": {
+    "home": "Accueil",
+    "games": "Jeux",
+    "tournaments": "Tournoi",
+    "leaderboard": "Classement",
+    "friends": "Amis",
+    "chat": "Discussion",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+	"local": "En local",
+	"remote": "En ligne",
+	"ai": "Contre l'IA",
+	"new_game": "Créer un jeux",
+	"join_game": "Rejoindre une partie",
+	"start": "Démarrer",
+	"start_tournament": "Démarrer le tournoi",
+	"startTournament": "Démarrer le tournoi",
+	"starting": "Démarrage...",
+	"player": "joueur",
+	"player_s": "s",
+	"min": "min",
+	"max": "max"
+  },
+  "welcome": "Bienvenue à Transcendence",
+  "please_login": "Voudriez vous, s'il vous plaît, choisir un jeu pour continuer 🚀",
+  "home": {
+    "hero": {
+      "subtitle": "Bienvenue dans l'arène du futur. La vitesse décide de tout ici. Prouvez votre supériorité dans le Pong classique ou le Breakout destructeur."
+    },
+    "cards": {
+      "arena": {
+        "title": "ARÈNE",
+        "description": "Choisissez le mode de jeu. Classique ou Arcade. Duel solo ou Tournoi.",
+        "button": "JOUER"
+      },
+      "community": {
+        "title": "COMMUNAUTÉ",
+        "description": "Trouvez des adversaires, ajoutez des amis, bloquez des ennemis. Chat en direct.",
+        "button": "CHAT"
+      },
+      "profile": {
+        "title": "PROFIL",
+        "description": "Vos statistiques, historique de victoires et paramètres d'avatar. Connaissez vos chiffres.",
+        "button": "PROFIL"
+      },
+      "login": {
+        "title": "IDENTIFICATION",
+        "description": "Connectez-vous pour sauvegarder votre progression et accéder aux tournois.",
+        "button": "CONNEXION"
+      },
+      "register": {
+        "title": "INSCRIPTION",
+        "description": "Créez un nouveau profil. Commencez votre voyage vers le sommet du classement dès maintenant.",
+        "button": "CRÉER"
+      }
+    }
+  },
+
+  "login": {
+    "title": "Se connecter",
+    "button": "Connexion"
+  },
+  "logout": {
+    "button": "Se déconnecter"
+  },
+  "register": {
+    "title": "S'inscrire",
+    "button": "S'inscrire"
+  },
+  "game": {
+    "player": "Joueur",
+    "pong": {
+      "description": "Duel classique. Deux joueurs, une balle, vitesse pure."
+    },
+    "breakout": {
+      "description": "Défi arcade. Cassez le mur et marquez un maximum de points."
+    }
+  },
+  "system": {
+    "error": {
+      "http404": "La page que vous recherchez n'existe pas",
+      "notFoundTitle": "Page non trouvée",
+      "backToHome": "Retour à l'accueil"
+    }
+  },
+  "modal": {
+    "head": "Connectez-vous ",
+    "loginWith": "Se connecter avec ",
+    "email": "Email",
+    "password": "Mot de passe",
+    "login": "Se connecter",
+    "notRegistered": "Pas encore inscrit? ",
+    "register": "Créer un compte"
+  },
+  "registration": {
+    "head": "Créer un compte",
+    "displayName": "Nom d'affichage *",
+    "displayNamePlaceholder": "Votre nom d'affichage",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Jean",
+    "lastName": "Nom de famille",
+    "lastNamePlaceholder": " Dupont",
+    "password": "Mot de passe *",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe *",
+    "confirmPasswordPlaceholder": "Répétez votre mot de passe",
+    "registerAccount": "Enregistrer un nouveau compte",
+    "creatingAccount": "Création du compte...",
+    "toastError": "Erreur : ",
+    "toastSuccess": "Inscription réussie ! Redirection...",
+    "passwordRequirements": "Le mot de passe doit répondre aux exigences suivantes :",
+    "passwordRequirementsLength": "Au moins 8 caractères",
+    "passwordRequirementsUppercase": "Au moins une lettre majuscule",
+    "passwordRequirementsLowercase": "Au moins une lettre minuscule",
+    "passwordRequirementsNumber": "Au moins un chiffre",
+    "passwordRequirementsSpecial": "Au moins un caractère spécial",
+    "passwordRequirementsError": "Exigences du mot de passe non respectées : ",
+    "errors": {
+      "emailRequired": "L'email est obligatoire",
+      "emailInvalid": "Veuillez saisir une adresse email valide",
+      "displayNameRequired": "Le nom d'affichage est obligatoire",
+      "displayNameTooShort": "Le nom d'affichage doit contenir au moins 3 caractères",
+      "passwordRequired": "Le mot de passe est obligatoire",
+      "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+      "serverError": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+    }
+  },
+  "settings": {
+    "head": "Paramètres du profil",
+    "saveChanges": "Enregistrer les modifications",
+    "changesSaved": "Modifications enregistrées avec succès !",
+    "displayName": "Nom d'affichage:",
+    "firstName": "Prénom:",
+    "lastName": "Nom de famille:",
+    "email": "Email:",
+    "login": "Login:",
+    "avatar": "Avatar:",
+    "saveChangesButton": "Enregistrer les modifications",
+    "errors": {
+      "invalidImageType": "Veuillez sélectionner un fichier image valide (jpg, png, gif).",
+      "fileSizeExceeds": "La taille du fichier dépasse la limite de 5 Mo.",
+      "firstNameTooShort": "Le prénom doit comporter au moins 2 caractères",
+      "lastNameTooShort": "Le nom de famille doit comporter au moins 2 caractères"
+    }
+  },
+  "dropdownUser": {
+    "displayName": "Profil:",
+    "settings": "Paramètres",
+    "friends": "Amis",
+    "logout": "Se déconnecter",
+    "profile": "Profil"
+  },
+  "friends": {
+    "add": "Ajouter un ami",
+    "remove": "Supprimer",
+    "title": "Amis",
+    "searchPlaceholder": "Rechercher des utilisateurs par nom...",
+    "searchButton": "Rechercher",
+    "searchResults": "Résultats de recherche",
+    "yourFriends": "Vos amis",
+    "noFriends": "Vous n'avez pas encore d'amis.",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "block": "Bloquer",
+    "unblock": "Débloquer",
+    "chat": "Discussion",
+    "blockedUsers": "Utilisateurs bloqués",
+    "noBlockedUsers": "Aucun utilisateur bloqué.",
+    "addSuccess": "ajouté aux amis !",
+    "removeConfirm": "Êtes-vous sûr de vouloir retirer l'utilisateur",
+    "removeSuccess": "Ami supprimé.",
+    "blockSuccess": "bloqué.",
+    "unblockSuccess": "Débloqué",
+    "confirmYes": "Oui, je suis sûr",
+    "confirmNo": "Non, annuler",
+    "error": {
+      "fetchFriends": "Échec de la récupération des amis.",
+      "fetchBlocked": "Échec de la récupération de la liste des bloqués.",
+      "addFriend": "Impossible d'ajouter un ami.",
+      "removeFriend": "Impossible de retirer l'ami.",
+      "blockUser": "Impossible de bloquer l'utilisateur.",
+      "unblockUser": "Impossible de débloquer l'utilisateur.",
+      "searchUsers": "Impossible de rechercher des utilisateurs.",
+      "noResults": "Aucun utilisateur trouvé.",
+      "searchMinLength": "Le terme de recherche doit contenir au moins 2 caractères."
+    }
+  },
+  "toast": {
+    "Error": "Erreur : ",
+    "Success": "Inscription réussie ! Redirection..."
+  },
+  "tournament": {
+    "title": "Tournoi",
+    "systemTitle": "Système de tournoi",
+    "description": "Le système de tournoi vous avertira des matchs à venir.",    "participants": "Participants",    "testSection": {
+      "title": "🧪 Test de notification de tournoi",
+      "description": "Cliquez sur le bouton ci-dessous pour simuler une notification de tournoi. Une notification toast apparaîtra dans le coin supérieur droit.",
+      "button": "Envoyer une notification de test"
+    },
+    "instructions": {
+      "title": "Lorsqu'une notification de tournoi est reçue via WebSocket :",
+      "toast": "Une notification toast apparaît dans le coin supérieur droit",
+      "autoClose": "La notification disparaît automatiquement après 5 secondes",
+      "dismiss": "Vous pouvez la fermer manuellement en cliquant sur le bouton X",
+      "stack": "Plusieurs notifications peuvent s'empiler verticalement"
+    },
+    "notification": {
+      "matchStart": "Votre match de tournoi commence dans 5 minutes ! Préparez-vous ! 🎮"
+    }
+  },
+  "profile": {
+    "title": "Profil utilisateur",
+    "yourProfile": "Votre profil",
+    "pleaseLogin": "Veuillez vous connecter pour voir votre profil.",
+    "stats": {
+      "wins": "Victoires",
+      "losses": "Défaites",
+      "allTime": "Tous les temps"
+    },
+    "matchHistory": {
+      "title": "Matchs récents",
+      "noMatches": "Aucun match joué pour le moment.",
+      "match": "match",
+      "matches": "matchs",
+      "table": {
+        "date": "Date",
+        "opponent": "Adversaire",
+        "result": "Résultat",
+        "score": "Score"
+      },
+      "result": {
+        "win": "VICTOIRE",
+        "loss": "DÉFAITE",
+        "draw": "MATCH NUL"
+      }
+    },
+    "error": {
+      "loadFailed": "Échec du chargement des statistiques ou de l'historique du profil."
+    }
+  },
+  "chat": {
+    "title": "Discussion",
+    "conversations": "Conversations",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "chatWith": "Discussion avec",
+    "selectConversation": "Sélectionnez une conversation",
+    "noFriends": "Pas encore d'amis.",
+    "manageFriends": "Gérer les amis →",
+    "inviteToPlay": "Inviter à jouer",
+    "clearChat": "Effacer la discussion",
+    "noMessages": "Aucun message pour le moment. Commencez la conversation !",
+    "pickUser": "Choisissez un utilisateur à gauche",
+    "placeholder": "Tapez votre message...",
+    "placeholderDisabled": "Choisissez un utilisateur pour commencer à discuter",
+    "send": "Envoyer",
+    "gameInvite": {
+      "title": "Invitation au jeu",
+      "message": "vous a invité à jouer à Pong.",
+      "youInvited": "Vous avez invité {{name}} à jouer à Pong.",
+      "invitedYou": "{{name}} vous a invité à jouer à Pong.",
+      "you": "Vous",
+      "user": "Utilisateur",
+      "accept": "Accepter"
+    },
+    "you": "Vous",
+    "blocked": "Message non livré : le destinataire vous a bloqué."
+  }
+}

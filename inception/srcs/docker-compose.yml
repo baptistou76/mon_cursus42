@@ -1,0 +1,171 @@
+services:
+  mariadb:
+    # Nom du conteneur MariaDB
+    container_name: mariadb 
+    # Réseau auquel le conteneur appartient
+    networks:
+      - inception
+    # Chemin du Dockerfile pour construire l'image
+    build: 
+      context: ./requirements/mariadb
+    # Fichier contenant les variables d'environnement
+    env_file:
+      - .env
+    # Volumes pour persister les données de la base de données
+    volumes: 
+      - mariadb:/var/lib/mysql
+    # Redémarrer automatiquement le conteneur sauf s'il est arrêté manuellement
+    restart: always
+    # Exposer le port 3306 pour MariaDB
+    expose: 
+      - "3306"
+
+  nginx:
+    # Nom du conteneur NGINX
+    container_name: nginx
+    # Réseau auquel le conteneur appartient
+    networks:
+      - inception
+    # Indiquer que NGINX dépend de WordPress (ne démarre pas tant que WordPress n'est pas opérationnel)
+    depends_on: 
+      - wordpress
+    # Redémarrer automatiquement le conteneur sauf s'il est arrêté manuellement
+    restart: always
+    # Chemin du Dockerfile pour construire l'image
+    build:
+      context: requirements/nginx
+    # Fichier contenant les variables d'environnement
+    env_file:
+      - .env
+    # Mapper le port 443 du conteneur sur le port 443 de la machine locale
+    ports:
+      - "443:443"
+    # Monter le volume pour stocker les fichiers WordPress
+    volumes:
+      - wordpress:/var/www/html/wordpress
+
+  wordpress:
+    # Nom du conteneur WordPress
+    container_name: wordpress
+    # Réseau auquel le conteneur appartient
+    networks:
+      - inception
+    # Indiquer que WordPress dépend de MariaDB (ne démarre pas tant que MariaDB n'est pas opérationnel)
+    depends_on: 
+      - mariadb
+      - redis
+    # Redémarrer automatiquement le conteneur sauf s'il est arrêté manuellement
+    restart: always
+    # Chemin du Dockerfile pour construire l'image
+    build:
+      context: ./requirements/wordpress
+    # Fichier contenant les variables d'environnement
+    env_file:
+      - .env
+    # Monter le volume pour stocker les fichiers WordPress
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    # Exposer le port 9000 pour PHP-FPM
+    expose: 
+      - "9000"
+
+  redis:
+    # Nom du conteneur Redis
+    container_name: redis
+    build: ./requirements/bonus/redis
+    image: redis
+    # Réseau auquel le conteneur appartient
+    env_file:
+      - .env
+    networks:
+      - inception
+    # Redémarrer automatiquement le conteneur sauf s'il est arrêté manuellement
+    restart: on-failure
+    # Exposer le port 6379 pour Redis
+    expose:
+      - "6379"
+
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    image: adminer
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    networks:
+      - inception
+    ports:
+      - "8080:8080"
+    restart: on-failure
+
+  static_site:
+    container_name: static_site
+    build: ./requirements/bonus/static_site
+    networks:
+      - inception
+    ports:
+      - "4443:443"
+    restart: unless-stopped
+
+  ftp:
+    container_name: ftp
+    build: 
+      context: ./requirements/bonus/ftp
+      args:
+        - FTP_USER=${FTP_USER}
+        - FTP_PASSWORD=${FTP_PASSWORD}
+    image: ftp
+    env_file:
+      - .env
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    expose:
+      - "21"
+      - "21000"
+      - "21001"
+      - "21002"
+      - "21003"
+      - "21004"
+      - "21005"
+      - "21006"
+      - "21007"
+      - "21008"
+      - "21009"
+      - "21010"
+    restart: on-failure
+    volumes:
+      - ./srcs/wordpress:/var/www/html/wordpress
+
+# Définition des volumes
+volumes:
+  wordpress:
+    # Utiliser le driver local pour le volume
+    driver: local
+    driver_opts:
+      # Indique à Docker de ne pas créer un volume virtuel.
+      type: 'none'
+      # Demande à Docker de travailler directement dans le dossier de l'hôte spécifié.
+      o: 'bind'
+      # Emplacement sur l'hôte pour stocker les données WordPress
+      device: "/home/bcaumont/data/wordpress"
+  mariadb:
+    # Utiliser le driver local pour le volume
+    driver: local
+    driver_opts:
+      # Indique à Docker de ne pas créer un volume virtuel.
+      type: 'none'
+      # Demande à Docker de travailler directement dans le dossier de l'hôte spécifié.
+      o: 'bind'
+      # Emplacement sur l'hôte pour stocker les données MariaDB
+      device: "/home/bcaumont/data/mariadb"
+
+# Définition du réseau Docker
+networks:
+  inception:
+    # Nom du réseau Docker
+    name: inception
+    # Utiliser le driver bridge pour permettre la communication entre les conteneurs
+    driver: bridge

@@ -1,0 +1,273 @@
+{
+  "menu": {
+    "home": "Home",
+    "games": "Games",
+    "profile": "Profile",
+    "friends": "Friends",
+    "settings": "Settings",
+    "tournaments": "Tournament",
+    "leaderboard": "Leaderboard",
+    "chat": "Chat",
+	"local": "Local",
+	"remote": "Online",
+	"ai": "Against AI",
+	"new_game": "New game",
+	"join_game": "Join a game",
+	"start": "Start",
+	"start_tournament": "Start tournament",
+	"startTournament": "Start Tournament",
+	"starting": "Starting...",
+	"player": "player",
+	"player_s": "s",
+	"min": "min",
+	"max": "max"
+  },
+  "welcome": "Welcome to Transcendence",
+  "please_login": "Please, choose game to continue 🚀",
+  "home": {
+    "hero": {
+      "subtitle": "Welcome to the arena of the future. Speed decides everything here. Prove your superiority in classic Pong or destructive Breakout."
+    },
+    "cards": {
+      "arena": {
+        "title": "ARENA",
+        "description": "Choose game mode. Classic or Arcade. Single duel or Tournament.",
+        "button": "PLAY"
+      },
+      "community": {
+        "title": "COMMUNITY",
+        "description": "Find opponents, add friends, block enemies. Live chat.",
+        "button": "CHAT"
+      },
+      "profile": {
+        "title": "PROFILE",
+        "description": "Your stats, victory history and avatar settings. Know your numbers.",
+        "button": "PROFILE"
+      },
+      "login": {
+        "title": "IDENTIFICATION",
+        "description": "Log in to save progress and access tournaments.",
+        "button": "LOGIN"
+      },
+      "register": {
+        "title": "REGISTRATION",
+        "description": "Create a new profile. Start your journey to the top of the leaderboard right now.",
+        "button": "CREATE"
+      }
+    }
+  },
+
+  "login": {
+    "title": "Login",
+    "button": "Login"
+  },
+  "logout": {
+    "button": "Logout"
+  },
+  "register": {
+    "title": "Sign Up",
+    "button": "Sign Up"
+  },
+  "game": {
+    "player": "Player",
+    "pong": {
+      "description": "Classic duel. Two players, one ball, pure speed."
+    },
+    "breakout": {
+      "description": "Arcade challenge. Break the wall and score maximum points."
+    }
+  },
+  "system": {
+    "error": {
+      "http404": "The page you are looking for does not exist",
+      "notFoundTitle": "Page Not Found",
+      "backToHome": "Back to Home"
+    }
+  },
+  "modal": {
+    "head": "Sign in",
+    "loginWith": "Login with ",
+    "email": "Email",
+    "password": "Password",
+    "login": "Log in",
+    "notRegistered": "Not registered? ",
+    "register": "Create an account"
+  },
+  "registration": {
+    "head": "Create an Account",
+    "displayName": "Display Name *",
+    "displayNamePlaceholder": "Your Display Name",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "John",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Doe",
+    "password": "Password *",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password *",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "registerAccount": "Register New Account",
+    "creatingAccount": "Creating Account...",
+    "toastError": "Error: ",
+    "toastSuccess": "Registration successful! Redirecting...",
+    "passwordRequirements": "Password must meet the following requirements:",
+    "passwordRequirementsLength": "At least 8 characters",
+    "passwordRequirementsUppercase": "At least one uppercase letter",
+    "passwordRequirementsLowercase": "At least one lowercase letter",
+    "passwordRequirementsNumber": "At least one digit",
+    "passwordRequirementsSpecial": "At least one special character",
+    "passwordRequirementsError": "Password requirements not met: ",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "displayNameRequired": "Display name is required",
+      "displayNameTooShort": "Display name must be at least 3 characters",
+      "passwordRequired": "Password is required",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "serverError": "An error occurred during registration. Please try again."
+    }
+  },
+  "settings": {
+    "head": "Profile Settings",
+    "saveChanges": "Save Changes",
+    "changesSaved": "Changes saved successfully!",
+    "displayName": "Display Name:",
+    "firstName": "First Name:",
+    "lastName": "Last Name:",
+    "email": "Email:",
+    "login": "Login:",
+    "avatar": "Avatar:",
+    "saveChangesButton": "Save Changes",
+    "errors": {
+      "invalidImageType": "Please select a valid image file (jpg, png, gif).",
+      "fileSizeExceeds": "File size exceeds 5MB limit.",
+      "firstNameTooShort": "First name must be at least 2 characters",
+      "lastNameTooShort": "Last name must be at least 2 characters"
+    }
+  },
+  "dropdownUser": {
+    "displayName": "Display Name:",
+    "settings": "Settings",
+    "friends": "Friends",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "friends": {
+    "add": "Add Friend",
+    "remove": "Remove",
+    "title": "Friends",
+    "searchPlaceholder": "Search users by name...",
+    "searchButton": "Search",
+    "searchResults": "Search Results",
+    "yourFriends": "Your Friends",
+    "noFriends": "You have no friends yet.",
+    "online": "Online",
+    "offline": "Offline",
+    "block": "Block",
+    "unblock": "Unblock",
+    "chat": "Chat",
+    "blockedUsers": "Blocked Users",
+    "noBlockedUsers": "No blocked users.",
+    "addSuccess": "added to friends!",
+    "removeConfirm": "Are you sure you want to remove",
+    "removeSuccess": "Friend removed.",
+    "blockSuccess": "blocked.",
+    "unblockSuccess": "Unblocked",
+    "confirmYes": "Yes, I'm sure",
+    "confirmNo": "No, cancel",
+    "error": {
+      "fetchFriends": "Failed to fetch friends.",
+      "fetchBlocked": "Failed to fetch blocked list.",
+      "addFriend": "Could not add friend.",
+      "removeFriend": "Could not remove friend.",
+      "blockUser": "Could not block user.",
+      "unblockUser": "Could not unblock user.",
+      "searchUsers": "Could not search users.",
+      "noResults": "No users found.",
+      "searchMinLength": "Search term must be at least 2 characters."
+    }
+  },
+  "toast": {
+    "Error": "Error: ",
+    "Success": "Registration successful! Redirecting..."
+  },
+  "tournament": {
+    "title": "Tournament",
+    "systemTitle": "Tournament System",
+    "description": "The tournament system will notify you about upcoming matches.",
+    "participants": "Participants",
+    "testSection": {
+      "title": "🧪 Test Tournament Notification",
+      "description": "Click the button below to simulate a tournament notification. A toast notification will appear in the top-right corner.",
+      "button": "Send Test Notification"
+    },
+    "instructions": {
+      "title": "When a tournament notification is received via WebSocket:",
+      "toast": "A toast notification appears in the top-right corner",
+      "autoClose": "The notification automatically disappears after 5 seconds",
+      "dismiss": "You can manually dismiss it by clicking the X button",
+      "stack": "Multiple notifications can stack vertically"
+    },
+    "notification": {
+      "matchStart": "Your tournament match starts in 5 minutes! Get ready! 🎮"
+    }
+  },
+  "profile": {
+    "title": "User Profile",
+    "yourProfile": "Your Profile",
+    "pleaseLogin": "Please log in to view your profile.",
+    "stats": {
+      "wins": "Wins",
+      "losses": "Losses",
+      "allTime": "All time"
+    },
+    "matchHistory": {
+      "title": "Recent Matches",
+      "noMatches": "No matches played yet.",
+      "match": "match",
+      "matches": "matches",
+      "table": {
+        "date": "Date",
+        "opponent": "Opponent",
+        "result": "Result",
+        "score": "Score"
+      },
+      "result": {
+        "win": "WIN",
+        "loss": "LOSS",
+        "draw": "DRAW"
+      }
+    },
+    "error": {
+      "loadFailed": "Failed to load profile stats or history."
+    }
+  },
+  "chat": {
+    "title": "Chat",
+    "conversations": "Conversations",
+    "online": "Online",
+    "offline": "Offline",
+    "chatWith": "Chat with",
+    "selectConversation": "Select a conversation",
+    "noFriends": "No friends yet.",
+    "manageFriends": "Manage friends →",
+    "inviteToPlay": "Invite to Play",
+    "clearChat": "Clear Chat",
+    "noMessages": "No messages yet. Start the conversation!",
+    "pickUser": "Pick a user on the left",
+    "placeholder": "Type your message...",
+    "placeholderDisabled": "Pick a user to start chatting",
+    "send": "Send",
+    "gameInvite": {
+      "title": "Game Invite",
+      "message": "invited you to play Pong.",
+      "youInvited": "You invited {{name}} to play Pong.",
+      "invitedYou": "{{name}} invited you to play Pong.",
+      "you": "You",
+      "user": "User",
+      "accept": "Accept"
+    },
+    "you": "You",
+    "blocked": "Message not delivered: recipient has blocked you."
+  }
+}

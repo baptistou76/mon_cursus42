@@ -1,0 +1,43 @@
+groups:
+- name: backend-alerts
+  rules:
+
+  # 🔴 Prometheus down
+  - alert: PrometheusDown
+    expr: up{job="prometheus"} == 0
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Prometheus is down"
+      description: "No response from prometheus service."
+
+  # 🔴 Backend down
+  - alert: BackendDown
+    expr: up{job="backend"} == 0
+    for: 10s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Backend ft_transcendence indisponible"
+      description: "No response from backend."
+
+  # 🟠 high CPU 
+  - alert: BackendHighCPU
+    expr: rate(process_cpu_seconds_total[1m]) * 100 
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Backend CPU usage is above 80%"
+      description: "CPU usage has been above 80% for more than 2 minutes."
+
+  # 🟠 high Memory
+  - alert: BackendHighMemory
+    expr: process_resident_memory_bytes / 1024 / 1024 > 500
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Backend memory usage is above 500MB"
+      description: "Memory usage has been above 500MB for more than 2 minutes."

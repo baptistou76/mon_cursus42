@@ -1,0 +1,284 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    env_file:
+      - .env
+    environment:
+      - LOG_FILE=/app/logs/app.log
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - uploads_data:/app/uploads
+      - ./logs:/app/logs
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - uploads_data:/var/www/uploads
+    depends_on:
+      - backend
+      - frontend
+      - grafana
+      - prometheus
+      - kibana
+    restart: always
+    networks:
+      - app-network
+      - elk-network
+
+  prometheus:
+    build: ./monitoring/prometheus
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus/rules/alerts.yml:/etc/prometheus/rules/alerts.yml
+    networks:
+      - app-network
+
+  grafana:
+    build:
+      context: ./monitoring/grafana
+      dockerfile: Dockerfile
+    container_name: grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - app-network
+
+  node-exporter:
+    build: ./monitoring/node-exporter
+    container_name: node_exporter
+    networks:
+      - app-network
+
+  cadvisor:
+    build: ./monitoring/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    networks:
+      - app-network
+
+  alertmanager:
+    build: ./monitoring/alertmanager
+    container_name: alertmanager
+    volumes:
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    networks:
+      - app-network
+
+  # -----------------------------
+  # ELK (Mode B: HTTPS + Security)
+  # -----------------------------
+
+  es-certs-setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: es_certs_setup
+    user: "0"
+    restart: "no"
+    volumes:
+      - es-certs:/usr/share/elasticsearch/config/certs
+      - ./elk/setup/instances.yml:/usr/share/elasticsearch/config/certs/instances.yml:ro
+    command: >
+      bash -c '
+        set -euo pipefail
+
+        mkdir -p /usr/share/elasticsearch/config/certs
+
+        if ! command -v unzip >/dev/null 2>&1; then
+          echo "[es-certs-setup] Installing unzip..."
+          apt-get update -y >/dev/null
+          apt-get install -y unzip >/dev/null
+          rm -rf /var/lib/apt/lists/*
+        fi
+
+        if [ ! -f /usr/share/elasticsearch/config/certs/ca/ca.crt ]; then
+          echo "[es-certs-setup] Cleaning old certs..."
+          rm -rf /usr/share/elasticsearch/config/certs/*.zip \
+                 /usr/share/elasticsearch/config/certs/ca \
+                 /usr/share/elasticsearch/config/certs/elasticsearch \
+                 /usr/share/elasticsearch/config/certs/kibana \
+                 /usr/share/elasticsearch/config/certs/logstash
+
+          echo "[es-certs-setup] Generating CA..."
+          /usr/share/elasticsearch/bin/elasticsearch-certutil ca --silent --pem \
+            -out /usr/share/elasticsearch/config/certs/ca.zip
+          unzip -o /usr/share/elasticsearch/config/certs/ca.zip \
+            -d /usr/share/elasticsearch/config/certs
+
+          echo "[es-certs-setup] Generating node certs..."
+          /usr/share/elasticsearch/bin/elasticsearch-certutil cert --silent --pem \
+            --in /usr/share/elasticsearch/config/certs/instances.yml \
+            --out /usr/share/elasticsearch/config/certs/certs.zip \
+            --ca-cert /usr/share/elasticsearch/config/certs/ca/ca.crt \
+            --ca-key  /usr/share/elasticsearch/config/certs/ca/ca.key
+
+          unzip -o /usr/share/elasticsearch/config/certs/certs.zip \
+            -d /usr/share/elasticsearch/config/certs
+
+          echo "[es-certs-setup] Fix perms (skip instances.yml)..."
+          find /usr/share/elasticsearch/config/certs -mindepth 1 ! -name "instances.yml" -exec chown 1000:0 {} +
+
+          find /usr/share/elasticsearch/config/certs -type d -exec chmod 755 {} \;
+          find /usr/share/elasticsearch/config/certs -type f -name "*.crt" -exec chmod 644 {} \;
+          find /usr/share/elasticsearch/config/certs -type f -name "*.key" -exec chmod 640 {} \;
+          find /usr/share/elasticsearch/config/certs -type f -name "*.zip" -exec chmod 600 {} \;
+        fi
+
+        echo "[es-certs-setup] Certs ready:"
+        ls -R /usr/share/elasticsearch/config/certs
+      '
+    networks:
+      - elk-network
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    depends_on:
+      es-certs-setup:
+        condition: service_completed_successfully
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - xpack.security.enabled=true
+      - xpack.security.enrollment.enabled=false
+
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.http.ssl.certificate=certs/elasticsearch/elasticsearch.crt
+      - xpack.security.http.ssl.key=certs/elasticsearch/elasticsearch.key
+
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.certificate=certs/elasticsearch/elasticsearch.crt
+      - xpack.security.transport.ssl.key=certs/elasticsearch/elasticsearch.key
+
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - bootstrap.memory_lock=false
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+      - es-certs:/usr/share/elasticsearch/config/certs:ro
+    networks:
+      - elk-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -u elastic:${ELASTIC_PASSWORD} https://localhost:9200/_cluster/health >/dev/null || exit 1"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.3
+    container_name: logstash
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - LS_JAVA_OPTS=-Xms256m -Xmx256m
+      - LOGSTASH_PASSWORD=${LOGSTASH_PASSWORD}
+    volumes:
+      - ./elk/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - es-certs:/usr/share/logstash/config/certs:ro
+      - logs-archive:/archives
+      - ./logs:/logs:ro
+    networks:
+      - elk-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.3
+    container_name: kibana
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - ELASTICSEARCH_HOSTS=https://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=/usr/share/kibana/config/certs/ca/ca.crt
+      - SERVER_BASEPATH=/kibana
+      - SERVER_REWRITEBASEPATH=true
+      - SERVER_PUBLICBASEURL=https://localhost/kibana
+    volumes:
+      - es-certs:/usr/share/kibana/config/certs:ro
+    networks:
+      - elk-network
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.11.3
+    container_name: filebeat
+    user: root
+    depends_on:
+      - logstash
+    volumes:
+      - ./elk/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: ["--strict.perms=false"]
+    networks:
+      - elk-network
+
+  elk-setup:
+    image: curlimages/curl:8.5.0
+    container_name: elk_setup
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - KIBANA_PASSWORD=${KIBANA_PASSWORD}
+      - LOGSTASH_PASSWORD=${LOGSTASH_PASSWORD}
+    volumes:
+      - ./elk/setup/init.sh:/init.sh:ro
+      - es-certs:/certs:ro
+    entrypoint: ["sh", "/init.sh"]
+    networks:
+      - elk-network
+
+volumes:
+  frontend_data:
+  backend_data:
+  uploads_data:
+  grafana-data:
+  es-data:
+  es-certs:
+  logs-archive:
+
+networks:
+  app-network:
+    driver: bridge
+  elk-network:
+    driver: bridge

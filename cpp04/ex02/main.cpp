@@ -1,0 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/29 04:50:29 by bcaumont          #+#    #+#             */
+/*   Updated: 2025/08/29 08:23:37 by bcaumont         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Animal.hpp"
+#include "Brain.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
+#include "WrongDog.hpp"
+
+int	main(void)
+{
+	//Animal a;
+	const Animal	*i = new Dog();
+	const Animal	*j = new Cat();
+
+	j->makeSound();
+	i->makeSound();
+
+	delete (i);
+	delete (j);
+	return (0);
+}

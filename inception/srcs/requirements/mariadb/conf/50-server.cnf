@@ -1,0 +1,33 @@
+# Section pour les paramètres spécifiques au serveur
+[server]
+
+# Section pour les paramètres du serveur MariaDB
+[mysqld]
+
+# L'utilisateur sous lequel le serveur MariaDB s'exécutera
+user = mysql
+
+# Port par default sur lequel le serveur MariaDB écoute
+port = 3306
+
+# Le répertoire de base pour l'installation de MariaDB
+basedir = /usr
+
+# Le répertoire où les fichiers de base de données MariaDB sont stockés
+datadir = /var/lib/mysql
+
+# Le fichier où l'ID de processus du serveur MariaDB sera stocké
+pid-file = /var/run/mysqld/mysqld.pid
+
+# Le fichier socket utilisé pour les connexions locales
+socket = /var/run/mysqld/mysqld.sock
+
+# Active, accepte, ecoute les connexions réseau sur le port 3306.
+# Cela permet aux clients distants de se connecter à la base de données via TCP/IP.
+skip_networking = off
+
+# La taille maximale d'un paquet ou de toute chaîne générée/intermédiaire
+max_allowed_packet = 64M
+
+# Le fichier où le journal des erreurs du serveur MariaDB sera stocké
+log_error = /var/log/mysql/error.log

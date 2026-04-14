@@ -1,0 +1,51 @@
+# =======================
+# Node / Front (si utilisé)
+# =======================
+node_modules/
+dist/
+
+# =======================
+# Docker
+# =======================
+**/Dockerfile.*
+**/docker-compose.override.yml
+**/docker-compose.prod.yml
+*.log
+*.tmp
+*.pid
+
+# =======================
+# WordPress
+# =======================
+/srcs/wordpress/wp-config.php
+/srcs/wordpress/wp-content/uploads/
+/srcs/wordpress/wp-content/cache/
+/srcs/wordpress/wp-content/plugins/redis-cache/
+/srcs/wordpress/wp-content/advanced-cache.php
+
+# =======================
+# FTP / Secrets
+# =======================
+*.env
+*.secret
+
+# =======================
+# MariaDB
+# =======================
+/srcs/mariadb/data/
+/srcs/mariadb/conf/*.cnf
+
+# =======================
+# Logs / Temp
+# =======================
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# =======================
+# IDE / OS
+# =======================
+.vscode/
+.idea/
+*.iml

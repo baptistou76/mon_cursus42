@@ -1,0 +1,25 @@
+# Ignore git et IDE files
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# WordPress data / cache / plugins
+srcs/wordpress/wp-config.php
+srcs/wordpress/wp-content/uploads/
+srcs/wordpress/wp-content/cache/
+srcs/wordpress/wp-content/advanced-cache.php
+srcs/wordpress/wp-content/plugins/redis-cache/
+
+# FTP / secrets
+*.env
+*.secret
+
+# MariaDB data
+srcs/mariadb/data/

@@ -1,0 +1,52 @@
+# ================================ #
+# ===== Global configuration ===== #
+# ================================ #
+global:
+  # Interval frequency prometheus get metrics
+  scrape_interval: 5s
+  # Interval frequency to evaluate alerts rules
+  evaluation_interval: 5s
+
+# ========================= #
+# ===== Alert manager ===== #
+# ========================= #
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets:
+        - alertmanager:9093
+
+# ============================= #
+# ===== Alerts rules file ===== #
+# ============================= #
+rule_files:
+  - "rules/*.yml"
+
+# ============================ #
+# ===== Targets to watch ===== #
+# ============================ #
+scrape_configs:
+  # Prometheus watch him-self
+  - job_name: "prometheus"
+    static_configs:
+      - targets:
+        - "localhost:9090"
+
+  # Watch backend from ft_transcendence
+  - job_name: "backend"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - "backend:3000"
+
+  # Watch node exporter
+  - job_name: "node-exporter"
+    static_configs:
+      - targets:
+          - "node-exporter:9100"
+
+  # Watch cAdvisor
+  - job_name: "cadvisor"
+    static_configs:
+      - targets:
+          - "cadvisor:8080"

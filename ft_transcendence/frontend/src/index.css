@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Orbitron", "Roboto", "Helvetica Neue", "Arial";
+  --font-body: "Orbitron", "Roboto", "Helvetica Neue", "Arial";
+
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  --color-neon-purple: #a855f7;
+  --color-neon-pink: #ec4899;
+  --color-neon-blue: #3b82f6;
+  --color-neon-cyan: #06b6d4;
+  --color-neon-green: #10b981;
+}
+
+:root,
+.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #d1d5db 100%);
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(168, 85, 247, 0.2);
+  --neon-intensity: 0.3;
+  /* From Pong */
+  color-scheme: light dark;
+  --light-color: black;
+  --light-bg: white;
+  --light-bg2: rgb(237, 238, 240);
+  --light-color: black;
+  --light-border: rgb(196, 199, 203);
+  --light-shadow: rgba(255, 255, 255, 0.5);
+}
+
+.dark {
+  --bg-primary: #0f0f1f;
+  --bg-secondary: #1a1a2e;
+  --bg-gradient: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 50%, #16213e 100%);
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #374151;
+  --card-bg: rgba(31, 41, 55, 0.7);
+  --nav-bg: rgba(15, 15, 31, 0.95);
+  --nav-border: rgba(168, 85, 247, 0.4);
+  --neon-intensity: 0.7;
+  /* From Pong */
+  --dark-bg: rgb(24, 25, 27);
+  --dark-bg2: rgb(46, 48, 52);
+  --dark-color: white;
+  --dark-border: rgb(24, 25, 27);
+  --dark-shadow: rgba(255, 255, 255, 0.7);
+}
+
+@layer base {
+  html {
+    font-family: "Orbitron", system-ui, sans-serif;
+    letter-spacing: 0.025em;
+  }
+
+  body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    letter-spacing: 0.025em;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    /* From Pong */
+    /* color: light-dark(var(--light-color), var(--dark-color)); */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: 0.05em;
+    font-weight: bold;
+  }
+  /* From Pong */
+  canvas {
+    border: 2px light-dark(var(--light-color), var(--dark-color));
+    color: light-dark(var(--light-bg2), var(--dark-bg2));
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.neon-text-purple {
+  color: #a855f7;
+  text-shadow:
+    0 0 calc(5px * var(--neon-intensity)) #a855f7,
+    0 0 calc(10px * var(--neon-intensity)) #a855f7,
+    0 0 calc(15px * var(--neon-intensity)) #a855f7;
+}
+
+.navbar-custom {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  backdrop-filter: blur(10px);
+}
+
+.navbar-link-custom {
+  color: var(--text-primary) !important;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.navbar-link-custom:hover {
+  color: #a855f7 !important;
+  text-shadow:
+    0 0 calc(5px * var(--neon-intensity)) #a855f7,
+    0 0 calc(10px * var(--neon-intensity)) #a855f7;
+}
+
+.navbar-link-active {
+  color: #a855f7 !important;
+  text-shadow:
+    0 0 calc(8px * var(--neon-intensity)) #a855f7,
+    0 0 calc(15px * var(--neon-intensity)) #a855f7;
+}
+
+.neon-btn {
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.neon-btn-light {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #a855f7;
+}
+
+.neon-btn-light:hover {
+  background: rgba(168, 85, 247, 0.2);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.neon-btn-purple {
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: white;
+}
+
+.neon-btn-purple:hover {
+  background: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.main-content {
+  background: var(--bg-gradient);
+  min-height: calc(100vh - 80px);
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 calc(5px * var(--neon-intensity)) currentColor,
+      0 0 calc(10px * var(--neon-intensity)) currentColor;
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow:
+      0 0 calc(10px * var(--neon-intensity)) currentColor,
+      0 0 calc(20px * var(--neon-intensity)) currentColor;
+  }
+}
+
+.neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.tracking-neon {
+  letter-spacing: 0.05em;
+}
+
+.tracking-neon-wide {
+  letter-spacing: 0.1em;
+}
+
+.dark-theme-toggle {
+  background: rgba(168, 85, 247, 0.1) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  color: #a855f7 !important;
+}
+
+.dark-theme-toggle:hover {
+  background: rgba(168, 85, 247, 0.2) !important;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3) !important;
+}
+
+/* SVG color fix for dark mode */
+.dark img[src$=".svg"],
+.dark svg {
+  filter: invert(1) hue-rotate(180deg) brightness(1.2);
+}
+
+/* Exception for logos and icons that should not be inverted */
+.dark img[src*="logo"],
+.dark .no-invert {
+  filter: none;
+}
